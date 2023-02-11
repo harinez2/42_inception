@@ -21,11 +21,11 @@ RUN  rm /etc/nginx/sites-enabled/default \
 	 && ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 
 #RUN  echo "########## Setting up cert files..."
-#RUN mkdir /etc/nginx/cert
-#COPY srcs/cert/* /etc/nginx/cert/
+RUN  mkdir /etc/nginx/cert
+COPY cert/* /etc/nginx/cert/
 
-EXPOSE 80/tcp
-EXPOSE 80/udp
+EXPOSE 443/tcp
+EXPOSE 443/udp
 
 RUN  echo "########## Finished!"
 
