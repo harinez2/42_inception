@@ -28,6 +28,7 @@ server {
 	listen [::]:443 ssl default_server;
 
 	ssl					on;
+	ssl_protocols		TLSv1.2 TLSv1.3;
 	ssl_certificate		/etc/nginx/cert/server.crt;
 	ssl_certificate_key	/etc/nginx/cert/server.key;
 	#
