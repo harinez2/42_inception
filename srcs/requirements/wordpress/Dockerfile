@@ -25,6 +25,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 	php-soap \
 	php-intl \
 	php-zip \
+	php-fpm \
 	&& apt-get clean
 
 RUN  echo "########## Installing wordpress..."
