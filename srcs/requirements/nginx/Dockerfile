@@ -12,7 +12,9 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 	&& apt-get clean
 
 RUN  echo "########## Installing nginx..."
-RUN  apt-get install -y nginx php-fpm && apt-get clean
+RUN  apt-get update && apt-get upgrade -y && apt-get install -y \
+	 nginx \
+	 && apt-get clean
 
 RUN  echo "########## Configuring nginx..."
 RUN  cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.original
