@@ -1,15 +1,38 @@
 version: "3.9"
+
 services:
-  web:
-    build: .
+
+  nginx:
+    build: requirements/nginx/
     ports:
-      - "8000:5000"
+      - "443:443"
     volumes:
-      - .:/code
-      - logvolume01:/var/log
+      - vol_wp:/vol_wp
     links:
-      - redis
-  redis:
-    image: redis
+      - nw_web
+
+  wordpress:
+    build: requirements/wordpress/
+    volumes:
+      - vol_wp:/vol_wp
+    depends_on:
+      - nginx
+      - mariadb
+    links:
+      - nw_web
+      - nw_db
+
+  mariadb:
+    build: requirements/mariadb/
+    volumes:
+      - vol_db:/vol_db
+    links:
+      - nw_db
+
 volumes:
-  logvolume01: {}
+  vol_wp:
+  vol_db:
+
+networks:
+  nw_web:
+  nw_db:
