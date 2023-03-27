@@ -26,10 +26,9 @@ RUN  rm /etc/nginx/sites-enabled/default \
 RUN  mkdir /etc/nginx/cert
 COPY cert/* /etc/nginx/cert/
 
-EXPOSE 443/tcp
-EXPOSE 443/udp
+EXPOSE 443
 
 RUN  echo "########## Finished!"
 
-# commands for runnning container
-CMD service nginx start && /bin/bash
+# start nginx in foreground
+CMD ["nginx", "-g", "daemon off;"]
