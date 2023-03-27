@@ -32,6 +32,8 @@ clean: down
 
 .PHONY: fclean
 fclean: down prune
+	sudo docker volume rm srcs_vol_db
+	sudo docker volume rm srcs_vol_wp
 
 .PHONY: re
 re: fclean all
