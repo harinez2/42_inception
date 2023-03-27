@@ -8,31 +8,29 @@ services:
       - "443:443"
     volumes:
       - vol_wp:/vol_wp
-    links:
-      - nw_web
+    restart: unless-stopped
+    tty: true
 
   wordpress:
     build: requirements/wordpress/
+    # ports:
+    #   - "9000:9000"
     volumes:
       - vol_wp:/vol_wp
     depends_on:
       - nginx
       - mariadb
-    links:
-      - nw_web
-      - nw_db
+    restart: unless-stopped
+    tty: true
 
   mariadb:
     build: requirements/mariadb/
+    # ports:
+    #   - "3306:3306"
     volumes:
       - vol_db:/vol_db
-    links:
-      - nw_db
+    restart: unless-stopped
 
 volumes:
   vol_wp:
   vol_db:
-
-networks:
-  nw_web:
-  nw_db:
