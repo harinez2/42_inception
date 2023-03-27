@@ -37,6 +37,6 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 EXPOSE 9000
 
 RUN  echo "########## Finished!"
-
-# commands for runnning container
-# CMD exec mysqld_safe
+COPY ./conf/startup.sh ./startup.sh
+RUN chmod +x startup.sh
+CMD ["bash", "./startup.sh"]
