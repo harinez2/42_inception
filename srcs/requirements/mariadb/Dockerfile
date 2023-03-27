@@ -20,12 +20,13 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 	&& apt-get clean
 
 RUN  echo "########## Configuring mariadb..."
-COPY conf/init_mariadb_config.sh /tmp
-RUN  cd /tmp && ./init_mariadb_config.sh
+RUN  mv /etc/mysql/mariadb.conf.d/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf.original
+COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/
+RUN mysql_install_db --basedir=/usr --datadir=/vol_db/mysql --user=mysql
 
-#RUN  echo "########## Setting up cert files..."
-# RUN  mkdir /etc/nginx/cert
-# COPY cert/* /etc/nginx/cert/
+RUN  echo "########## Initializing mariadb..."
+COPY conf/init_mariadb_config.sh /
+RUN  cd / && ./init_mariadb_config.sh
 
 EXPOSE 3306
 
