@@ -10,6 +10,8 @@ services:
       - vol_wp:/vol_wp
     env_file:
       - .env
+    networks:
+      - nw_inception
     restart: unless-stopped
 
   wordpress:
@@ -20,6 +22,8 @@ services:
       - vol_wp:/vol_wp
     env_file:
       - .env
+    networks:
+      - nw_inception
     depends_on:
       - nginx
       - mariadb
@@ -30,17 +34,23 @@ services:
       context: requirements/mariadb/
       args:
         - MYSQL_ROOT_PASSWD=maria42
-        - MYSQL_USER_NAME=user42
-        - MYSQL_USER_PASSWD=user42
-        - MYSQL_DB_NAME=db42
+        - MYSQL_USER_NAME=wpuser42
+        - MYSQL_USER_PASSWD=wppass42
+        - MYSQL_DB_NAME=wordpress42
     # ports:
     #   - "3306:3306"
     volumes:
       - vol_db:/vol_db
     env_file:
       - .env
+    networks:
+      - nw_inception
     restart: unless-stopped
 
 volumes:
   vol_wp:
   vol_db:
+
+networks:
+  nw_inception:
+    name: nw_inception
