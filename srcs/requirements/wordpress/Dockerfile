@@ -36,9 +36,9 @@ RUN  echo "########## Installing wordpress..."
 COPY conf/wordpress-6.1.1-ja.tar.gz /
 RUN  tar zxf wordpress-6.1.1-ja.tar.gz \
 	&& mkdir -p /vol_wp/wordpress \
-	&& mv wordpress/ /vol_wp/wordpress \
+	&& mv wordpress /vol_wp/ \
 	&& rm wordpress-6.1.1-ja.tar.gz
-RUN  sudo chmod -R 777 /vol_wp/wordpress
+RUN  sudo chmod -R 777 /vol_wp/wordpress/
 # RUN  sudo chown -R www-data:www-data /vol_wp/wordpress/
 
 EXPOSE 9000
