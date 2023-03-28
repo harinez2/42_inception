@@ -5,10 +5,12 @@ LABEL maintainer="yonishi@student.42tokyo.jp"
 RUN echo "########## Installing fundamental tools..."
 ARG DEBIAN_FRONTEND=noninteractive
 ARG DEBCONF_NOWARNINGS=yes
+# net-tools for netstat
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 	man \
 	vim \
 	curl \
+	net-tools \
 	&& apt-get clean
 
 RUN  echo "########## Installing nginx..."
