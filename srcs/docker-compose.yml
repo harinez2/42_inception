@@ -12,6 +12,8 @@ services:
       - .env
     networks:
       - nw_inception
+    depends_on:
+      - wordpress
     restart: unless-stopped
 
   wordpress:
@@ -23,7 +25,6 @@ services:
     networks:
       - nw_inception
     depends_on:
-      - nginx
       - mariadb
     restart: unless-stopped
 
