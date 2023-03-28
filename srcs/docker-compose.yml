@@ -16,8 +16,6 @@ services:
 
   wordpress:
     build: requirements/wordpress/
-    # ports:
-    #   - "9000:9000"
     volumes:
       - vol_wp:/vol_wp
     env_file:
@@ -37,8 +35,6 @@ services:
         - MYSQL_USER_NAME=wpuser42
         - MYSQL_USER_PASSWD=wppass42
         - MYSQL_DB_NAME=wordpress42
-    # ports:
-    #   - "3306:3306"
     volumes:
       - vol_db:/vol_db
     env_file:
