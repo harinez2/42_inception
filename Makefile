@@ -25,15 +25,14 @@ ps:
 
 .PHONY: prune
 prune: 
-	sudo docker system prune
+	sudo docker compose -f $(COMPOSE_FILE) down --rmi all --volumes --remove-orphans
+	sudo docker system prune -f
 
 .PHONY: clean
 clean: down
 
 .PHONY: fclean
 fclean: down prune
-	sudo docker volume rm srcs_vol_db
-	sudo docker volume rm srcs_vol_wp
 
 .PHONY: re
 re: fclean all
