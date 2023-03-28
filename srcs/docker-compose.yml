@@ -8,8 +8,9 @@ services:
       - "443:443"
     volumes:
       - vol_wp:/vol_wp
+    env_file:
+      - .env
     restart: unless-stopped
-    tty: true
 
   wordpress:
     build: requirements/wordpress/
@@ -17,18 +18,27 @@ services:
     #   - "9000:9000"
     volumes:
       - vol_wp:/vol_wp
+    env_file:
+      - .env
     depends_on:
       - nginx
       - mariadb
     restart: unless-stopped
-    tty: true
 
   mariadb:
-    build: requirements/mariadb/
+    build:
+      context: requirements/mariadb/
+      args:
+        - MYSQL_ROOT_PASSWD=maria42
+        - MYSQL_USER_NAME=user42
+        - MYSQL_USER_PASSWD=user42
+        - MYSQL_DB_NAME=db42
     # ports:
     #   - "3306:3306"
     volumes:
       - vol_db:/vol_db
+    env_file:
+      - .env
     restart: unless-stopped
 
 volumes:

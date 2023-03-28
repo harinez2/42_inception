@@ -4,10 +4,10 @@
 service mysql start
 
 # mysql root password
-MYSQL_ROOT_PASSWD=maria42
-MYSQL_USER_NAME=user42
-MYSQL_USER_PASSWD=user42
-MYSQL_DB_NAME=db42
+# MYSQL_ROOT_PASSWD=maria42
+# MYSQL_USER_NAME=user42
+# MYSQL_USER_PASSWD=user42
+# MYSQL_DB_NAME=db42
 
 # execute mysql_secure_installation script
 expect -c '

@@ -5,7 +5,7 @@ all: up
 
 .PHONY: up
 up:
-	sudo docker compose -f $(COMPOSE_FILE) up -d --build
+	sudo docker compose -f $(COMPOSE_FILE) --env-file ./srcs/.env up -d --build
 
 .PHONY: down
 down:

@@ -26,6 +26,14 @@ RUN mysql_install_db --basedir=/usr --datadir=/vol_db/mysql --user=mysql
 
 RUN  echo "########## Initializing mariadb..."
 COPY conf/init_mariadb_config.sh /
+ARG MYSQL_ROOT_PASSWD=
+ARG MYSQL_USER_NAME=
+ARG MYSQL_USER_PASSWD=
+ARG MYSQL_DB_NAME=
+ENV MYSQL_ROOT_PASSWD=${MYSQL_ROOT_PASSWD}
+ENV MYSQL_USER_NAME=${MYSQL_USER_NAME}
+ENV MYSQL_USER_PASSWD=${MYSQL_USER_PASSWD}
+ENV MYSQL_DB_NAME=${MYSQL_DB_NAME}
 RUN  cd / && ./init_mariadb_config.sh
 
 EXPOSE 3306
