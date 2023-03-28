@@ -35,11 +35,15 @@ RUN  echo "########## Installing wordpress..."
 # 	&& apt-get clean
 COPY conf/wordpress-6.1.1-ja.tar.gz /
 RUN  tar zxf wordpress-6.1.1-ja.tar.gz \
-	&& mkdir -p /vol_wp/wordpress \
-	&& mv wordpress /vol_wp/ \
+	&& mkdir -p /home/yonishi/data/wordpress \
+	&& mv wordpress /home/yonishi/data/ \
 	&& rm wordpress-6.1.1-ja.tar.gz
-RUN  sudo chmod -R 777 /vol_wp/wordpress/
-# RUN  sudo chown -R www-data:www-data /vol_wp/wordpress/
+RUN  sudo chmod -R 777 /home/yonishi/
+RUN  sudo chown -R www-data:www-data /home/yonishi/
+
+RUN  echo "########## Configuring php-fpm..."
+RUN  mv /etc/php/7.3/fpm/pool.d/www.conf /etc/php/7.3/fpm/pool.d/www.conf.original
+COPY conf/www.conf /etc/php/7.3/fpm/pool.d/
 
 EXPOSE 9000
 

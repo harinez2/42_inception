@@ -7,7 +7,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - vol_wp:/vol_wp
+      - vol_wp:/home/yonishi/data
     env_file:
       - .env
     networks:
@@ -17,7 +17,7 @@ services:
   wordpress:
     build: requirements/wordpress/
     volumes:
-      - vol_wp:/vol_wp
+      - vol_wp:/home/yonishi/data
     env_file:
       - .env
     networks:
