@@ -17,7 +17,13 @@ services:
     restart: unless-stopped
 
   wordpress:
-    build: requirements/wordpress/
+    build:
+      context: requirements/wordpress/
+      args:
+        - MYSQL_ROOT_PASSWD=maria42
+        - MYSQL_USER_NAME=wpuser42
+        - MYSQL_USER_PASSWD=wppass42
+        - MYSQL_DB_NAME=wordpress42
     volumes:
       - vol_wp:/home/yonishi/data
     env_file:
