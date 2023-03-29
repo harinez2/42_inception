@@ -43,7 +43,7 @@ server {
 	#
 	# include snippets/snakeoil.conf;
 
-	root /home/yonishi/data/wordpress;
+	root /home/yonishi/data;
 
 	# Add index.php to the list if you are using PHP
 	index index.html index.htm index.nginx-debian.html index.php;
