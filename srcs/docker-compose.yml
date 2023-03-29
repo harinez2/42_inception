@@ -20,16 +20,18 @@ services:
     build:
       context: requirements/wordpress/
       args:
-        - MYSQL_ROOT_PASSWD=${MYSQL_ROOT_PASSWD}
-        - MYSQL_USER_NAME=${MYSQL_USER_NAME}
-        - MYSQL_USER_PASSWD=${MYSQL_USER_PASSWD}
-        - MYSQL_DB_NAME=${MYSQL_DB_NAME}
         - WP_HOMEPATH=${WP_HOMEPATH}
-        - WP_SITE_TITLE=${WP_SITE_TITLE}
     volumes:
       - vol_wp:/home/yonishi/data
     env_file:
       - .env
+    environment:
+      - MYSQL_ROOT_PASSWD
+      - MYSQL_USER_NAME
+      - MYSQL_USER_PASSWD
+      - MYSQL_DB_NAME
+      - WP_HOMEPATH
+      - WP_SITE_TITLE
     networks:
       - nw_main
     depends_on:

@@ -1,10 +1,6 @@
 FROM debian:buster
 
 LABEL maintainer="yonishi@student.42tokyo.jp"
-ARG MYSQL_ROOT_PASSWD
-ARG MYSQL_USER_NAME
-ARG MYSQL_USER_PASSWD
-ARG MYSQL_DB_NAME
 ARG WP_HOMEPATH
 
 RUN echo "########## Installing fundamental tools..."
@@ -54,23 +50,7 @@ RUN chmod +x wp-cli.phar
 RUN sudo mv wp-cli.phar /usr/local/bin/wp
 # download wp
 RUN mkdir -p ${WP_HOMEPATH}
-WORKDIR ${WP_HOMEPATH}
 RUN wp core download --allow-root --path=${WP_HOMEPATH}
-# create a new wp-config.php file
-RUN wp config create --allow-root \
-	--dbname=${MYSQL_DB_NAME} \
-	--dbuser=root \
-	--prompt=${MYSQL_ROOT_PASSWD} \
-	--dbhost=mariadb
-# create the db based on wp-config.php
-RUN wp db create
-# install wp
-RUN wp core install \
-	--url=${WP_HOMEPATH} \
-	--title=${WP_SITE_TITLE} \
-	--admin_user=${MYSQL_USER_NAME} \
-	--admin_password=${MYSQL_USER_PASSWD} \
-	--admin_email=example@example.com
 
 RUN  echo "########## Configuring php-fpm..."
 RUN  mv /etc/php/7.3/fpm/pool.d/www.conf /etc/php/7.3/fpm/pool.d/www.conf.original
@@ -81,4 +61,4 @@ EXPOSE 9000
 RUN  echo "########## Finished!"
 COPY ./conf/startup.sh ./startup.sh
 RUN chmod +x startup.sh
-CMD ["bash", "./startup.sh"]
+CMD ["/bin/bash", "./startup.sh"]
