@@ -9,7 +9,7 @@ while ! mysql -h mariadb -u root -p ${MYSQL_ROOT_PASSWD} ${MYSQL_DB_NAME} &>/dev
 done
 
 # create a new wp-config.php file
-cd ${WP_HOMEPATH}
+cd ${WP_HOME_PATH}
 wp config create --allow-root \
 	--dbname=${MYSQL_DB_NAME} \
 	--dbuser=root \
@@ -21,7 +21,7 @@ wp db create
 
 # install wp
 wp core install \
-	--url=${WP_HOMEPATH} \
+	--url=${WP_HOME_PATH} \
 	--title=${WP_SITE_TITLE} \
 	--admin_user=${MYSQL_USER_NAME} \
 	--admin_password=${MYSQL_USER_PASSWD} \

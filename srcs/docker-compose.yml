@@ -20,7 +20,7 @@ services:
     build:
       context: requirements/wordpress/
       args:
-        - WP_HOMEPATH=${WP_HOMEPATH}
+        - WP_HOME_PATH=${WP_HOME_PATH}
     volumes:
       - vol_wp:/home/yonishi/data
     env_file:
@@ -30,7 +30,7 @@ services:
       - MYSQL_USER_NAME
       - MYSQL_USER_PASSWD
       - MYSQL_DB_NAME
-      - WP_HOMEPATH
+      - WP_HOME_PATH
       - WP_SITE_TITLE
     networks:
       - nw_main
