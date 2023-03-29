@@ -36,7 +36,7 @@ ENV MYSQL_USER_PASSWD=${MYSQL_USER_PASSWD}
 ENV MYSQL_DB_NAME=${MYSQL_DB_NAME}
 RUN  cd / && ./init_mariadb_config.sh
 
-EXPOSE 3306
+# EXPOSE 3306
 
 RUN  echo "########## Finished!"
 

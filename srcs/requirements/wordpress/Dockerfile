@@ -43,7 +43,7 @@ RUN  echo "########## Configuring php-fpm..."
 RUN  mv /etc/php/7.3/fpm/pool.d/www.conf /etc/php/7.3/fpm/pool.d/www.conf.original
 COPY conf/www.conf /etc/php/7.3/fpm/pool.d/
 
-EXPOSE 9000
+# EXPOSE 9000
 
 RUN  echo "########## Finished!"
 COPY ./conf/startup.sh ./startup.sh
