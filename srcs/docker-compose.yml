@@ -25,6 +25,7 @@ services:
         - MYSQL_USER_PASSWD=${MYSQL_USER_PASSWD}
         - MYSQL_DB_NAME=${MYSQL_DB_NAME}
         - WP_HOMEPATH=${WP_HOMEPATH}
+        - WP_SITE_TITLE=${WP_SITE_TITLE}
     volumes:
       - vol_wp:/home/yonishi/data
     env_file:

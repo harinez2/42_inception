@@ -58,13 +58,19 @@ WORKDIR ${WP_HOMEPATH}
 RUN wp core download --allow-root --path=${WP_HOMEPATH}
 # create a new wp-config.php file
 RUN wp config create --allow-root \
-	--dbname=${MYSQL_DB_NAME} --dbuser=root --prompt=${MYSQL_ROOT_PASSWD} \
+	--dbname=${MYSQL_DB_NAME} \
+	--dbuser=root \
+	--prompt=${MYSQL_ROOT_PASSWD} \
 	--dbhost=mariadb
 # create the db based on wp-config.php
 RUN wp db create
 # install wp
-RUN wp core install --url=${WP_HOMEPATH} --title="inception 42" \
-	--admin_user=${MYSQL_USER_NAME} --admin_password=${MYSQL_USER_PASSWD} --admin_email=example@example.com
+RUN wp core install \
+	--url=${WP_HOMEPATH} \
+	--title=${WP_SITE_TITLE} \
+	--admin_user=${MYSQL_USER_NAME} \
+	--admin_password=${MYSQL_USER_PASSWD} \
+	--admin_email=example@example.com
 
 RUN  echo "########## Configuring php-fpm..."
 RUN  mv /etc/php/7.3/fpm/pool.d/www.conf /etc/php/7.3/fpm/pool.d/www.conf.original
