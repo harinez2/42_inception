@@ -43,9 +43,6 @@ services:
       context: requirements/mariadb/
       args:
         - MYSQL_ROOT_PASSWD=${MYSQL_ROOT_PASSWD}
-        - MYSQL_USER_NAME=${MYSQL_USER_NAME}
-        - MYSQL_USER_PASSWD=${MYSQL_USER_PASSWD}
-        - MYSQL_DB_NAME=${MYSQL_DB_NAME}
     volumes:
       - vol_db:/vol_db
     env_file:
