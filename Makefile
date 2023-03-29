@@ -5,7 +5,7 @@ all: up
 
 .PHONY: up
 up:
-	sudo docker compose -f $(COMPOSE_FILE) --env-file ./srcs/.env up -d --build
+	sudo docker compose -f $(COMPOSE_FILE) up -d --build
 
 .PHONY: down
 down:
@@ -26,13 +26,16 @@ ps:
 .PHONY: prune
 prune: 
 	sudo docker compose -f $(COMPOSE_FILE) down --rmi all --volumes --remove-orphans
+
+.PHONY: sysprune
+sysprune: 
 	sudo docker system prune -f
 
 .PHONY: clean
 clean: down
 
 .PHONY: fclean
-fclean: down prune
+fclean: clean prune
 
 .PHONY: re
 re: fclean all
