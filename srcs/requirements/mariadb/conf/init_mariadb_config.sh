@@ -25,23 +25,5 @@ expect -c '
     send "Y\n";
     interact;'
 
-# create user and db, then add priviledges
-expect -c '
-    set timeout 1;
-    spawn mysql -u root -p;
-    expect "Enter password:";
-    send -- "'"${MYSQL_ROOT_PASSWD}"'\n";
-    expect "MariaDB \[\(none\)\]>";
-    send -- "CREATE USER '\'"${MYSQL_USER_NAME}"''\''@'\''localhost'\'' IDENTIFIED BY '\'"${MYSQL_USER_PASSWD}"''\'';\n"
-    expect "MariaDB \[\(none\)\]>";
-    send -- "CREATE DATABASE `'"${MYSQL_DB_NAME}"'`;\n"
-    expect "MariaDB \[\(none\)\]>";
-    send -- "GRANT ALL PRIVILEGES ON `'"${MYSQL_DB_NAME}"'`.* TO \"'"${MYSQL_USER_NAME}"'\"@\"localhost\";\n"
-    expect "MariaDB \[\(none\)\]>";
-    send -- "FLUSH PRIVILEGES;\n"
-    expect "MariaDB \[\(none\)\]>";
-    send -- "exit;\n"
-    interact;'
-
 # stop sql
 service mysql stop

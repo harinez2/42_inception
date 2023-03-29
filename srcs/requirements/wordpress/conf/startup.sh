@@ -3,7 +3,13 @@
 ################################################################
 # wordpress
 
+# wait for mysql to run
+while ! mysql -h mariadb -u root -p ${MYSQL_ROOT_PASSWD} ${MYSQL_DB_NAME} &>/dev/null; do
+    sleep 1
+done
+
 # create a new wp-config.php file
+cd ${WP_HOMEPATH}
 wp config create --allow-root \
 	--dbname=${MYSQL_DB_NAME} \
 	--dbuser=root \
