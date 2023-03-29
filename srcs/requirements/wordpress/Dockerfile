@@ -31,19 +31,6 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 	&& apt-get clean
 
 RUN  echo "########## Installing wordpress..."
-#RUN groupadd -r mysql && useradd -r -g mysql mysql
-# RUN apt-get update && apt-get upgrade -y && apt-get install -y \
-# 	wordpress \
-# 	&& apt-get clean
-
-# COPY conf/wordpress-6.1.1-ja.tar.gz /
-# RUN  tar zxf wordpress-6.1.1-ja.tar.gz \
-# 	&& mkdir -p /home/yonishi/data/wordpress \
-# 	&& mv wordpress /home/yonishi/data/ \
-# 	&& rm wordpress-6.1.1-ja.tar.gz
-# RUN  sudo chmod -R 777 /home/yonishi/
-# RUN  sudo chown -R www-data:www-data /home/yonishi/
-
 # setup WP-CLI
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x wp-cli.phar
