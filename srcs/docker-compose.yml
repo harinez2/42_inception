@@ -11,7 +11,7 @@ services:
     env_file:
       - .env
     networks:
-      - nw_inception
+      - nw_main
     depends_on:
       - wordpress
     restart: unless-stopped
@@ -31,7 +31,7 @@ services:
     env_file:
       - .env
     networks:
-      - nw_inception
+      - nw_main
     depends_on:
       - mariadb
     restart: unless-stopped
@@ -49,7 +49,7 @@ services:
     env_file:
       - .env
     networks:
-      - nw_inception
+      - nw_main
     restart: unless-stopped
 
 volumes:
@@ -57,5 +57,4 @@ volumes:
   vol_db:
 
 networks:
-  nw_inception:
-    name: nw_inception
+  nw_main:
