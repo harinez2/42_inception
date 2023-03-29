@@ -5,6 +5,7 @@ ARG MYSQL_ROOT_PASSWD
 ARG MYSQL_USER_NAME
 ARG MYSQL_USER_PASSWD
 ARG MYSQL_DB_NAME
+ARG WP_HOMEPATH
 
 RUN echo "########## Installing fundamental tools..."
 ARG DEBIAN_FRONTEND=noninteractive
@@ -52,9 +53,9 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 RUN chmod +x wp-cli.phar
 RUN sudo mv wp-cli.phar /usr/local/bin/wp
 # download wp
-RUN mkdir -p /home/yonishi/data/
-WORKDIR /home/yonishi/data/
-RUN wp core download --allow-root --path=/home/yonishi/data/
+RUN mkdir -p ${WP_HOMEPATH}
+WORKDIR ${WP_HOMEPATH}
+RUN wp core download --allow-root --path=${WP_HOMEPATH}
 # create a new wp-config.php file
 RUN wp config create --allow-root \
 	--dbname=${MYSQL_DB_NAME} --dbuser=root --prompt=${MYSQL_ROOT_PASSWD} \
@@ -62,7 +63,7 @@ RUN wp config create --allow-root \
 # create the db based on wp-config.php
 RUN wp db create
 # install wp
-RUN wp core install --url=/home/yonishi/data/ --title="inception 42" \
+RUN wp core install --url=${WP_HOMEPATH} --title="inception 42" \
 	--admin_user=${MYSQL_USER_NAME} --admin_password=${MYSQL_USER_PASSWD} --admin_email=example@example.com
 
 RUN  echo "########## Configuring php-fpm..."
