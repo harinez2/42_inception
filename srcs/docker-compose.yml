@@ -26,12 +26,13 @@ services:
     env_file:
       - .env
     environment:
-      - MYSQL_ROOT_PASSWD
       - MYSQL_USER_NAME
       - MYSQL_USER_PASSWD
       - MYSQL_DB_NAME
       - WP_HOME_PATH
       - WP_SITE_TITLE
+      - SITE_DOMAIN_NAME
+      - SITE_EMAIL
     networks:
       - nw_main
     depends_on:
@@ -43,6 +44,8 @@ services:
       context: requirements/mariadb/
       args:
         - MYSQL_ROOT_PASSWD=${MYSQL_ROOT_PASSWD}
+        - MYSQL_USER_NAME=${MYSQL_USER_NAME}
+        - MYSQL_USER_PASSWD=${MYSQL_USER_PASSWD}
     volumes:
       - vol_db:/vol_db
     env_file:

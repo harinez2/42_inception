@@ -14,7 +14,6 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 	&& apt-get clean
 
 RUN  echo "########## Installing php ..."
-#RUN groupadd -r mysql && useradd -r -g mysql mysql
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 	php \
 	php-mysql \

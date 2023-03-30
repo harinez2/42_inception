@@ -4,28 +4,38 @@
 # wordpress
 
 # wait for mysql to run
-while ! mysql -h mariadb -u root -p ${MYSQL_ROOT_PASSWD} ${MYSQL_DB_NAME} &>/dev/null; do
+while ! echo "QUIT" | mysql -hmariadb -u${MYSQL_USER_NAME} -p${MYSQL_USER_PASSWD} &>/dev/null; do
     sleep 1
 done
 
+# log file
+log_file=wpcli_installation.log
+
 # create a new wp-config.php file
 cd ${WP_HOME_PATH}
+echo "wp config create-------------------" >>$log_file
 wp config create --allow-root \
 	--dbname=${MYSQL_DB_NAME} \
-	--dbuser=root \
-	--prompt=${MYSQL_ROOT_PASSWD} \
-	--dbhost=mariadb
+	--dbuser=${MYSQL_USER_NAME} \
+	--dbpass=${MYSQL_USER_PASSWD} \
+	--dbhost=mariadb \
+	--path=${WP_HOME_PATH} \
+	>>$log_file
 
 # create the db based on wp-config.php
-wp db create
+echo "wp db create-------------------" >>$log_file
+wp db create --allow-root \
+	>>$log_file
 
 # install wp
-wp core install \
-	--url=${WP_HOME_PATH} \
-	--title=${WP_SITE_TITLE} \
+echo "wp core install-------------------" >>$log_file
+wp core install --allow-root \
+	--url=${SITE_DOMAIN_NAME} \
+	--title="${WP_SITE_TITLE}" \
 	--admin_user=${MYSQL_USER_NAME} \
 	--admin_password=${MYSQL_USER_PASSWD} \
-	--admin_email=example@example.com
+	--admin_email=${SITE_EMAIL} \
+	>>$log_file
 
 ################################################################
 # php
