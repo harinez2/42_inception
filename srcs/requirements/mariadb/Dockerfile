@@ -32,7 +32,8 @@ COPY conf/init_mariadb_config.sh /
 ENV MYSQL_ROOT_PASSWD=${MYSQL_ROOT_PASSWD}
 ENV MYSQL_USER_NAME=${MYSQL_USER_NAME}
 ENV MYSQL_USER_PASSWD=${MYSQL_USER_PASSWD}
-RUN  cd / && ./init_mariadb_config.sh
+RUN chmod +x init_mariadb_config.sh
+RUN cd / && ./init_mariadb_config.sh
 
 # EXPOSE 3306
 
