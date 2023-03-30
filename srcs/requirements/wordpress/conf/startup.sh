@@ -30,7 +30,7 @@ wp db create --allow-root \
 # install wp
 echo "wp core install-------------------" >>$log_file
 wp core install --allow-root \
-	--url=${SITE_DOMAIN_NAME} \
+	--url=https://${SITE_DOMAIN_NAME} \
 	--title="${WP_SITE_TITLE}" \
 	--admin_user=${MYSQL_USER_NAME} \
 	--admin_password=${MYSQL_USER_PASSWD} \
