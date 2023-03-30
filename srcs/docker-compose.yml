@@ -7,7 +7,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - vol_wp:/home/yonishi/data
+      - vol_wp:${WP_HOME_PATH}
     env_file:
       - .env
     networks:
@@ -22,7 +22,7 @@ services:
       args:
         - WP_HOME_PATH=${WP_HOME_PATH}
     volumes:
-      - vol_wp:/home/yonishi/data
+      - vol_wp:${WP_HOME_PATH}
     env_file:
       - .env
     environment:
@@ -60,17 +60,17 @@ services:
 
 volumes:
   vol_wp:
-  #   driver: local
-  #   driver_opts:
-  #     type: none
-  #     o: bind
-  #     device: "/home/yonishi/data/wp"
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "${VOL_PATH}/wordpress"
   vol_db:
-  #   driver: local
-  #   driver_opts:
-  #     type: none
-  #     o: bind
-  #     device: "/home/yonishi/data/db"
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "${VOL_PATH}/mariadb"
 
 networks:
   nw_main:
