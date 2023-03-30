@@ -26,6 +26,7 @@ echo "mysql_secure_installation finished:$?"
 	tmp_file=tmp_file
 	cat << EOL > $tmp_file
 CREATE USER IF NOT EXISTS '$MYSQL_USER_NAME'@'%' IDENTIFIED by '$MYSQL_USER_PASSWD';
+GRANT ALL ON *.* TO '$MYSQL_USER_NAME'@'%';
 
 ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWD';
 FLUSH PRIVILEGES;
