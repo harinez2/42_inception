@@ -31,6 +31,10 @@ services:
       - MYSQL_DB_NAME
       - WP_HOME_PATH
       - WP_SITE_TITLE
+      - WP_ADMIN_NAME
+      - WP_ADMIN_PASSWD
+      - WP_EDITOR_NAME
+      - WP_EDITOR_PASSWD
       - SITE_DOMAIN_NAME
       - SITE_EMAIL
     networks:
@@ -56,7 +60,17 @@ services:
 
 volumes:
   vol_wp:
+  #   driver: local
+  #   driver_opts:
+  #     type: none
+  #     o: bind
+  #     device: "/home/yonishi/data/wp"
   vol_db:
+  #   driver: local
+  #   driver_opts:
+  #     type: none
+  #     o: bind
+  #     device: "/home/yonishi/data/db"
 
 networks:
   nw_main:
