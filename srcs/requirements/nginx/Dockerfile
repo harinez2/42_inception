@@ -1,6 +1,7 @@
 FROM debian:buster
 
 LABEL maintainer="yonishi@student.42tokyo.jp"
+ARG WP_HOME_PATH
 
 RUN echo "########## Installing fundamental tools..."
 ARG DEBIAN_FRONTEND=noninteractive
@@ -21,6 +22,8 @@ RUN  apt-get update && apt-get upgrade -y && apt-get install -y \
 RUN  echo "########## Configuring nginx..."
 RUN  cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.original
 COPY conf/nginx.default /etc/nginx/sites-available/default
+RUN  sed -i -e "s@root /var/www/html;@root ${WP_HOME_PATH};@" \
+		/etc/nginx/sites-available/default
 RUN  rm /etc/nginx/sites-enabled/default \
 	 && ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 

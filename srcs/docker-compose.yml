@@ -3,7 +3,10 @@ version: "3.9"
 services:
 
   nginx:
-    build: requirements/nginx/
+    build:
+      context: requirements/nginx/
+      args:
+        - WP_HOME_PATH=${WP_HOME_PATH}
     ports:
       - "443:443"
     volumes:
