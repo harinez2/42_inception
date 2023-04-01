@@ -1,43 +1,32 @@
 # 42_inception
 
-Wordpress、Nginx、MariaDBの各コンテナをDocker composeで起動できます。
+Wordpress + PHP-FPM、Nginx、MariaDBの各コンテナをDocker composeで起動できます。
 
 # Features
 
 - 各コンテナはインストール手順をスクリプトで記述しており、カスタマイズが可能です。
 - 各サービスがそれぞれ1つのコンテナとなっており、サービスの追加等拡張性があります。
-- NginxとMariaDBはaptで、WordpressはWP-CLIを用いてインストールします。
+- Nginx・MariaDB・PHP-FPMはaptで、WordpressはWP-CLIを用いてインストールします。
  
 # Requirement
  
 * Docker
 * Docker compose
 
-### 動作確認環境(1)
+### 動作確認環境(1) WSL2(Ubuntu20) on Windows
 
-```bash
-$ uname -a
-Linux <hostname> 5.4.72-microsoft-standard-WSL2 #1 SMP Wed Oct 28 23:40:43 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+- Windows 10 Home 22H2
+- WSL2
+- Ubuntu-20.04
+- Docker version 20.10.22, build 3a2c30b
+- Docker Compose version v2.14.1
 
-$ sudo docker -v
-Docker version 20.10.22, build 3a2c30b
+### 動作確認環境(2) Ubuntu18 on VirtualBox
 
-$ sudo docker compose version
-Docker Compose version v2.14.1
-```
-
-### 動作確認環境(2)
-
-```bash
-~ uname -a
-Linux salty-VirtualBox 5.4.0-146-generic #163~18.04.1-Ubuntu SMP Mon Mar 20 15:02:59 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux
-
-~ sudo docker -v
-Docker version 20.10.21, build 20.10.21-0ubuntu1~18.04.2
-
-~ sudo docker compose version
-Docker Compose version v2.17.2
-```
+- VirtualBox 7.06 r155176 (Qt5.15.2)
+- Ubuntu 18.04.6 LTS (xubuntu)
+- Docker version 20.10.21, build 20.10.21-0ubuntu1~18.04.2
+- Docker Compose version v2.17.2
 
 # Pre-requirements
 
@@ -96,6 +85,7 @@ sudo mkdir -p /home/yonishi/data/mariadb
 ```
 
 ## docker login
+Debian:busterイメージダウンロードで必要。
 
 ```bash
 sudo docker login
@@ -104,31 +94,31 @@ sudo docker login
 # Installation
  
 ```bash
-git clone https://github.com/hoge/~
+git clone https://github.com/harinez2/42_inception.git
 cd 42_inception
 make
 ```
  
 ### Makefileのルール
 
-```
-# compose up
+```Makefile
+# docker compose up -d --build
 make
 make all
 make up
 
-# compose down
+# docker compose down
 make down
 make clean
 
-# start/stop
+# docker start/stop
 make start
 make stop
 
-# show ps
+# docker ps
 make ps
 
-# prune
+# docker prune
 make prune
 make fclean
 
@@ -153,7 +143,7 @@ curl https://yonishi.42.fr/ -k
 
 # Note
  
-- 設定は.envに記載する
+- 設定は.envに記載してください。
  
 # Author
 
